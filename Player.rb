@@ -1,0 +1,36 @@
+# A participant in the game who owns a cup of dice and a score sheet.
+class Player
+  attr_reader :name, :score_sheet
+
+  def initialize(name, dice_cup, evaluator = RollEvaluator.new)
+    @name = name
+    @dice_cup = dice_cup
+    @score_sheet = ScoreSheet.new
+    @evaluator = evaluator
+  end
+
+  # Rolls the player's remaining dice once, applies the rules, and reports the outcome.
+  def roll
+    faces = @dice_cup.roll_all
+    points = @evaluator.score(faces)
+    @score_sheet.record(points) if points.positive?
+    removed = @dice_cup.remove_if { |face| @evaluator.dead_face?(face) }
+    RollResult.new(faces, points, removed, @dice_cup.count)
+  end
+
+  def dice_left
+    @dice_cup.count
+  end
+
+  def alive?
+    !@dice_cup.empty?
+  end
+
+  def total_score
+    @score_sheet.total
+  end
+
+  def to_s
+    @name
+  end
+end
