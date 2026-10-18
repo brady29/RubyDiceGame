@@ -1,4 +1,4 @@
-# Plays a full game of Drop Dead with computer-controlled players and prints a transcript.
+# Plays a full Drop Dead game automatically and prints a transcript.
 class AutoDropDead
   MIN_DICE = 2
   MIN_PLAYERS = 1
@@ -8,7 +8,6 @@ class AutoDropDead
     @random = random
   end
 
-  # Plays a whole game automatically and returns the winning player(s).
   def play_game(sides, dice_count, player_count)
     validate(sides, dice_count, player_count)
     game = DropDeadGame.new(create_players(sides, dice_count, player_count))
@@ -33,7 +32,6 @@ class AutoDropDead
     end
   end
 
-  # A round gives every player who is still in exactly one turn.
   def play_rounds(game)
     round = 0
     until game.over?

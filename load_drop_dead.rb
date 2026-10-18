@@ -1,5 +1,4 @@
-# Loads every class used by the Drop Dead dice game.
-# Each class lives in its own file named after the class.
+# Loads all Drop Dead game classes.
 require_relative 'Die.rb'
 require_relative 'DiceCup.rb'
 require_relative 'RollEvaluator.rb'

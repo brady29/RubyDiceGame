@@ -1,4 +1,4 @@
-# Keeps track of who is still playing and whose turn it is.
+# Tracks the active players and turn order.
 class DropDeadGame
   attr_reader :players
 
@@ -14,7 +14,6 @@ class DropDeadGame
     @active_players.dup
   end
 
-  # The player whose turn is next, or nil once the game is over.
   def current_player
     @active_players[@current_index]
   end
@@ -23,8 +22,7 @@ class DropDeadGame
     @active_players.empty?
   end
 
-  # Plays the current player's turn, removing them if they drop dead.
-  # Yields each RollResult of the turn and returns the completed Turn.
+  # Plays the current player's turn and drops them if they have no dice left.
   def play_next_turn(&on_roll)
     raise 'the game is over' if over?
 
@@ -34,7 +32,7 @@ class DropDeadGame
     turn
   end
 
-  # Players with the highest total score (more than one on a tie).
+  # Players with the highest score (several on a tie).
   def winners
     best = @players.map(&:total_score).max
     @players.select { |player| player.total_score == best }

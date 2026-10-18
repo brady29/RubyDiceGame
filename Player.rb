@@ -1,4 +1,4 @@
-# A participant in the game who owns a cup of dice and a score sheet.
+# A player with a cup of dice and a score sheet.
 class Player
   attr_reader :name, :score_sheet
 
@@ -9,7 +9,7 @@ class Player
     @evaluator = evaluator
   end
 
-  # Rolls the player's remaining dice once, applies the rules, and reports the outcome.
+  # Rolls once, records any points, and removes 2s and 5s.
   def roll
     faces = @dice_cup.roll_all
     points = @evaluator.score(faces)

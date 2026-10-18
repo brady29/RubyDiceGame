@@ -12,7 +12,6 @@ class Die
     @value = nil
   end
 
-  # Rolls the die and returns the face that came up.
   def roll
     @value = @random.rand(1..@sides)
   end

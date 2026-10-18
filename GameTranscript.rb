@@ -1,4 +1,4 @@
-# Writes a human-readable account of the game as it is played.
+# Prints the game transcript.
 class GameTranscript
   RULE = '=' * 60
 
